@@ -1,10 +1,15 @@
-// Select color input
-// Select size input
 
-// When size is submitted by the user, call makeGrid()
+$(() => {
+  const pixelTable = $('#pixel-canvas');
+  const height = $('#input_height').val();
+  const width = $('#input_height').val();
+  const createBtn = $('grid-submit');
+  const colorPicker = $('#colorPicker').val();
+  console.log(pixelTable, height, width, createBtn, colorPicker);
 
-function makeGrid() {
+  const makeGrid = () => {
+    console.log('Making grid');
+  };
+  makeGrid();
+});
 
-// Your code goes here!
-
-}
