@@ -8,44 +8,93 @@
 </head>
 
 <body>
+  <header class="main-header">
+    <h1>Lab: Pixel Art Maker</h1>
+  </header>
   <div class="wrapper">
-
-    <header class="main-header">
-      <h1>Lab: Pixel Art Maker</h1>
-    </header>
-
-    <aside class="left-sidebar">
+    <div class="left-sidebar">
       <section class="grid-generator">
-        <h2>Choose Grid Size</h2>
+        <h3>Choose Grid Size</h3>
+        <p>Maximus size is 40 x 40</p>
         <form id="sizePicker">
           <label>Grid Height:
-            <input type="number" id="input_height" name="height" min="1" value="40" autofocus>
+            <input type="number" id="input_height" name="height" min="1" value="40">
           </label>
           <label> Grid Width:
-            <input type="number" id="input_width" name="width" min="1" value="60">
+            <input type="number" id="input_width" name="width" min="1" value="40">
           </label>
-          <button type="button" class="grid-submit btn">Create</button>
+          <button type="button" class="grid-submit btn" autofocus>Create</button>
         </form>
       </section>
-      <section class="color-picker">
-        <h2>Pick A Color</h2>
-        <input type="color" id="colorPicker">
-      </section>
-    </aside>
+    </div>
 
     <main class="content">
-      <h2 class="canvas-header">Canvas</h2>
-      <div class="btn-panel">
-        <button class="btn" type="button">Clear</button>
-        <button class="btn" type="button">Btn2</button>
-        <button class="btn remove-btn" type="button">Remove</button>
-      </div>
+      <section class="control-panel">
+        <section class="color-picker">
+          <h3>Pick A Color</h3>
+          <input type="color" class="palette-btn colorPicker">
+        </section>
+        <h2 class="canvas-header">Canvas</h2>
+        <section class="btn-panel">
+          <button class="btn random-color">RDM</button>
+          <button class="btn clear-btn" type="button">Clear</button>
+          <button class="btn fill-btn" type="button">Fill</button>
+          <button class="btn hide-btn" type="button">Hide</button>
+        </section>
+        <section class="palette">
+          <button class="palette-btn palette-btn--orange" type="button"></button>
+          <button class="palette-btn palette-btn--red" type="button"></button>
+          <button class="palette-btn palette-btn--orange" type="button"></button>
+          <button class="palette-btn palette-btn--yellow" type="button"></button>
+          <button class="palette-btn palette-btn--pink" type="button"></button>
+          <button class="palette-btn palette-btn--purple" type="button"></button>
+          <button class="palette-btn palette-btn--indigo" type="button"></button>
+          <button class="palette-btn palette-btn--blue" type="button"></button>
+          <button class="palette-btn palette-btn--teal" type="button"></button>
+          <button class="palette-btn palette-btn--bluegray" type="button"></button>
+          <button class="palette-btn palette-btn--green" type="button"></button>
+          <button class="palette-btn palette-btn--toxic" type="button"></button>
+          <button class="palette-btn palette-btn--lime" type="button"></button>
+          <button class="palette-btn palette-btn--white" type="button"></button>
+          <button class="palette-btn palette-btn--black" type="button"></button> 
+        </section>
+      </section>
       <table id="pixel_canvas"></table>
     </main>
 
     <aside class="right-sidebar">
       <section class="to-do-list">
         <div class="to-do-item">
+          <p>Canvas Header Move Bug</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Random Color Button</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Add Color Picker</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Max Grid Size Warning</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Hide-Show List</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Make List Items Clickable</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Palette</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Button Panel Layout</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Button Actions Released</p>
+        </div>
+        <div class="to-do-item success">
+          <p>Add Button Panel</p>
+        </div>
+        <div class="to-do-item success">
           <p>Add Painter</p>
         </div>
         <div class="to-do-item success">
