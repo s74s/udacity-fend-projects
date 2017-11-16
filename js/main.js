@@ -27,8 +27,10 @@ $(() => {
     console.log('Making grid');
     $('#pixel_canvas').remove();
     $('.control-panel').after('<table id="pixel_canvas"></table>');
+    
     let w = $('#input_width').val();
     let h = $('#input_height').val();
+
     if (w > 40) {
       w = 40;
       $(warningText).css('opacity', '1');
@@ -37,15 +39,18 @@ $(() => {
       h = 40;
       $(warningText).css('opacity', '1');
     }
+
     for (let row = 1; row <= h; row += 1) {
       $('#pixel_canvas').append(`<tr id="${row}"></tr>`);
       for (let columns = 1; columns <= w; columns += 1) {
         $(`#${row}`).append('<td></td>');
       }
     }
+
     $('#pixel_canvas').on('mousedown', 'td', (evt) => {
       $(evt.target).css('background-color', color);
     });
+
     $('.palette').fadeIn(2500);
     $('.color-picker').fadeIn(2500);
     $(btnPanel).fadeIn(2500);

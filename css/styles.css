@@ -60,14 +60,12 @@ body {
   width: 80%;
   height: 815px;
   margin: 0 auto;
-  margin-bottom: 150px;
   padding: 10px;
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 2fr 6fr 2fr;
   grid-template-areas:
   "left-sidebar content right-sidebar";
-  box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.12);
 }
 .main-header {
   grid-area: header;
@@ -97,6 +95,7 @@ h1 {
   transition: all 0.4s ease;
 }
 .main-header {
+  margin-bottom: 7px;
   background-color: #fff; 
   transition: all 0.4s ease;  
   padding: 10px;
@@ -113,11 +112,15 @@ h1 {
 /* CONTROL-PANEL  */
 
 .control-panel {
+  border: 1px solid #c6d3dd;
+  box-shadow: 1px 2px 2px 0px rgba(0,0,0,0.3);
+  border-radius: 3px;
+  padding: 5px;
   display: grid;
   grid-gap: 20px;
   grid-template-areas:
-  "color-picker canvas-header palette"
-  "color-picker   btn-panel   palette";
+  "color-picker   btn-panel   palette"
+  "color-picker canvas-header palette";
 }
 
 /* COLOR-PICKER */
@@ -134,7 +137,10 @@ input[type="color"] {
 .colorPicker {
   display: inline-block;
 }
-
+.color-picker h3 {
+  margin: 0;
+  margin-bottom: 10px;
+}
 /* CANVAS-HEADER  */
 .canvas-header {
   font-size: 50px;
@@ -303,7 +309,7 @@ input[type="number"]:focus  {
   border-radius: 3px;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url(img/check-square.svg);
+  background-image: url(../img/check-square.svg);
   opacity: 0.3;  
 }
 .success {
@@ -311,7 +317,7 @@ input[type="number"]:focus  {
 }
 .to-do-item.success p::after {
   opacity: 1;
-  background-image: url(img/check-square.svg);
+  background-image: url(../img/check-square.svg);
   background-color: rgb(63, 214, 63);
 }
 
@@ -355,7 +361,7 @@ input[type="number"]:focus  {
   bottom: 0;
   right: 0; */
   height: 140px;
-  border: 1px solid #c6d3dd;
+  /* border: 1px solid #c6d3dd; */
   box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.12);
   padding: 20px;
   /* border-radius: 5px; */
