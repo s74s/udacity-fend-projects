@@ -8,6 +8,10 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.3;
+  background-image: url(http://www.powerpointhintergrund.com/uploads/2017/05/pixel-art-wallpaper-hd-11.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* BTN */
@@ -32,6 +36,7 @@ body {
 .btn:hover {
   color: #14e425; 
   background-color: #fafaef;
+  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);
 }
 
 .btn:active {
@@ -39,7 +44,9 @@ body {
   transition: none;
   box-shadow: 5px 5px 6px 0px rgba(46,61,73,0.3);
 }
-
+.btn:focus {
+  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);  
+}
 
 /* LAYOUT */
 
@@ -81,13 +88,13 @@ h1 {
   font-size: 60px;
   line-height: 1.33em;
   margin: 0;
-  background-color: #fff;
+  background-color: rgba(245, 246, 252, 0.85);
   transition: all 0.4s ease;
 }
 
 .main-header {
   margin-bottom: 7px;
-  background-color: #fff; 
+  background-color: rgba(245, 246, 252, 0.85);
   transition: all 0.4s ease;  
   padding: 10px;
   border: 1px solid #c6d3dd;
@@ -113,6 +120,7 @@ h1 {
   grid-template-areas:
   "color-picker   btn-panel   palette"
   "color-picker canvas-header palette";
+  background-color: rgba(245, 246, 252, 0.85);  
 }
 
 /* COLOR-PICKER */
@@ -157,7 +165,7 @@ input[type="color"] {
 }
 
 .fill-btn {
-  background-color: rgba(0, 0, 0, 0.1)
+  background-color: rgb(214, 202, 202)
 }
 
 /* PALETTE  */
@@ -193,6 +201,10 @@ input[type="color"] {
   box-shadow: 3px 3px 4px 0px rgba(46,61,73,0.3);
 }
 
+.palette-btn--prpl {
+  background-color: #B388FF;
+}
+
 .palette-btn--red {
   background-color: #F44336;
 }
@@ -206,7 +218,7 @@ input[type="color"] {
 }
 
 .palette-btn--pink {
-  background-color: #E91E63;
+  background-color: #FF4081;
 }
 
 .palette-btn--purple {
@@ -255,6 +267,7 @@ table,
 tr,
 td {
   border: 1px solid #c6d3dd;
+  background-color: 
 }
 
 table {
@@ -263,6 +276,8 @@ table {
   border-collapse: collapse;
   margin: 20px auto;
   cursor: pointer;
+  background-color: rgba(245, 246, 252, 0.95);
+  
 }
 
 tr {
@@ -282,6 +297,7 @@ td {
   box-shadow: 1px 2px 2px 0px rgba(0,0,0,0.3);
   border-radius: 3px;
   margin-bottom: 20px;
+  background-color: rgba(245, 246, 252, 0.75);
 }
 
 .grid-generator form {
@@ -308,11 +324,13 @@ input[type="number"] {
   display: inline-block;
   border-radius: 3px;
   border: 1px solid #c6d3dd;
+  box-shadow: 0px 0px 2px 2px rgba(46,61,73,0.15);
+  
 }
 
 input[type="number"]:hover,
 input[type="number"]:focus  {
-  box-shadow: 0px 0px 2px 2px rgba(46,61,73,0.15);
+  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);
   transition: 0.5s ease-in-out;
 }
 
@@ -326,6 +344,8 @@ input[type="number"]:focus  {
   display: flex;
   flex-direction: column;
   padding: 5px;
+  background-color: rgba(245, 246, 252, 0.85);
+  border-radius: 3px;
 }
 
 .to-do-item {
@@ -357,7 +377,9 @@ input[type="number"]:focus  {
   border-radius: 3px;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url(../img/check-square.svg);
+  background-image: url(http://freevector.co/wp-content/uploads/2014/07/74013-check-box-with-check-sign.png);
+  background-repeat: no-repeat;
+  background-size: contain;
   opacity: 0.3;  
 }
 .success {
@@ -365,7 +387,7 @@ input[type="number"]:focus  {
 }
 .to-do-item.success p::after {
   opacity: 1;
-  background-image: url(../img/check-square.svg);
+  background-image: url(http://freevector.co/wp-content/uploads/2014/07/74013-check-box-with-check-sign.png);
   background-color: rgb(63, 214, 63);
 }
 
@@ -375,6 +397,7 @@ input[type="number"]:focus  {
   padding: 7px 60px;
   border: none;
   box-shadow: 0px 0px 1px 0px rgba(46,61,73,0.3);
+  background-color: rgba(245, 246, 252, 0.85);  
 }
 
 .list-show-btn:hover::after {
@@ -410,7 +433,7 @@ input[type="number"]:focus  {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #c6d3dd;
+  background-color: rgba(245, 246, 252, 0.85);
 }
 
 .project-link {
@@ -422,19 +445,21 @@ input[type="number"]:focus  {
   background-position: center;
   transition: 0.3s;
 }
+
 .project-link:hover {
   background-color: #9fc0d4;
 }
+
 .project-link--github {
-  background-image: url(../img/github_logo.png);
-  width: 150px;
-  height: 15px; 
+  background-image: url(https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png);
+  width: 120px;
+  height: 15px;
 }
 
 .project-link--udacity {
   width: 200px;
   height: 20px;
-  background-image: url(../img/udacity_logo.png);
+  background-image: url(https://static1.squarespace.com/static/54a21086e4b097c5f1550ed8/557eee11e4b0c3993def002b/5702ac9ab6aa607cbb96e59e/1459793150043/udacity_logo_2.png);
   margin-right: 40px;
 }
 
