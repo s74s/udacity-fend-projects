@@ -1,20 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
-
+@import url('https://fonts.googleapis.com/css?family=Nothing+You+Could+Do');
 body {
   font-family: 'Open Sans', sans-serif;
   color: #2e3d49;
-  line-height: 1.33em;
   text-align: center;
   margin: 0;
   padding: 0;
   line-height: 1.3;
-  background-image: url(http://www.powerpointhintergrund.com/uploads/2017/05/pixel-art-wallpaper-hd-11.jpeg);
+  background-image: url(https://image.freepik.com/free-photo/blue-canvas-background_1253-61.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+
 /* BTN */
+
 .btn {
   display: inline-block;
   margin: 3px;
@@ -28,25 +29,27 @@ body {
   background-color: #fff;
   border: 1px solid #c6d3dd;
   border-radius: 3px;
-  box-shadow: 2px 2px 1px 0px rgba(46,61,73,0.3);
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.btn:hover {
-  color: #14e425; 
-  background-color: #fafaef;
   box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);
 }
 
+.btn:hover {
+  color: #14e425;
+  background-color: #fafaef;
+  box-shadow: 2px 2px 1px 0px rgba(46, 61, 73, 0.3);
+}
+
 .btn:active {
-  background-color: rgba(46,61,73,0.1);
+  background-color: rgba(46, 61, 73, 0.1);
   transition: none;
-  box-shadow: 5px 5px 6px 0px rgba(46,61,73,0.3);
+  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);
 }
+
 .btn:focus {
-  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);  
+  box-shadow: 2px 2px 1px 0px rgba(46, 61, 73, 0.3);
 }
+
 
 /* LAYOUT */
 
@@ -58,12 +61,7 @@ body {
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 2fr 6fr 2fr;
-  grid-template-areas:
-  "left-sidebar content right-sidebar";
-}
-
-.main-header {
-  grid-area: header;
+  grid-template-areas: "left-sidebar content right-sidebar";
 }
 
 .left-sidebar {
@@ -82,46 +80,47 @@ body {
 /* HEADER */
 
 h1 {
-  font-family: Monoton;
+  font-family: 'Nothing You Could Do', cursive;
   color: #2e3d49;
   font-weight: normal;
   font-size: 60px;
   line-height: 1.33em;
   margin: 0;
-  background-color: rgba(245, 246, 252, 0.85);
+  background-color: rgba(245, 246, 252, 0.5);
   transition: all 0.4s ease;
 }
 
 .main-header {
+  grid-area: header;
   margin-bottom: 7px;
-  background-color: rgba(245, 246, 252, 0.85);
-  transition: all 0.4s ease;  
+  background-color: rgba(245, 246, 252, 0.7);
+  transition: all 0.4s ease;
   padding: 10px;
   border: 1px solid #c6d3dd;
-  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
 }
 
 .main-header:hover {
-  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 
-/* MAIN */ 
+/* MAIN */
+
 
 /* CONTROL-PANEL  */
 
 .control-panel {
   border: 1px solid #c6d3dd;
-  box-shadow: 1px 2px 2px 0px rgba(0,0,0,0.3);
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
   padding: 5px;
   display: grid;
   grid-gap: 20px;
-  grid-template-areas:
-  "color-picker   btn-panel   palette"
-  "color-picker canvas-header palette";
-  background-color: rgba(245, 246, 252, 0.85);  
+  grid-template-areas: "color-picker   btn-panel   palette" "color-picker canvas-header palette";
+  background-color: rgba(245, 246, 252, 0.85);
 }
+
 
 /* COLOR-PICKER */
 
@@ -142,17 +141,23 @@ input[type="color"] {
 }
 
 .color-picker h3 {
+  font-family: 'Nothing You Could Do', cursive;
   margin: 0;
   margin-bottom: 10px;
+  font-size: 18px;
 }
+
 
 /* CANVAS-HEADER  */
 
 .canvas-header {
+  font-family: 'Nothing You Could Do', cursive;
   font-size: 50px;
+  text-align: center;
   margin: 0;
   grid-area: canvas-header;
 }
+
 
 /* BTN-PANEL  */
 
@@ -165,13 +170,15 @@ input[type="color"] {
 }
 
 .fill-btn {
-  background-color: rgb(214, 202, 202)
+  background-color: rgb(214, 202, 202);
+  border: 3px solid #c6d3dd;
 }
+
 
 /* PALETTE  */
 
 .palette {
-  width: 200px;  
+  width: 200px;
   grid-area: palette;
   display: flex;
   flex-wrap: wrap;
@@ -186,19 +193,22 @@ input[type="color"] {
   padding: 5px 15px;
   border: 1px solid #c6d3dd;
   border-radius: 3px;
-  box-shadow: 2px 2px 1px 0px rgba(46,61,73,0.3);
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);
 }
 
 .palette-btn:hover {
   color: #14e425;
-  box-shadow: 5px 5px 6px 0px rgba(46,61,73,0.3);
+  box-shadow: 2px 2px 1px 0px rgba(46, 61, 73, 0.3);
 }
 
 .palette-btn:active {
-  transition: 0;
-  box-shadow: 3px 3px 4px 0px rgba(46,61,73,0.3);
+  box-shadow: 3px 3px 4px 0px rgba(46, 61, 73, 0.3);
+}
+
+.palette-btn:focus {
+  box-shadow: 2px 2px 1px 0px rgba(46, 61, 73, 0.3);
 }
 
 .palette-btn--prpl {
@@ -261,13 +271,13 @@ input[type="color"] {
   background-color: #fff;
 }
 
+
 /* TABLE STYLES */
 
 table,
 tr,
 td {
   border: 1px solid #c6d3dd;
-  background-color: 
 }
 
 table {
@@ -277,7 +287,6 @@ table {
   margin: 20px auto;
   cursor: pointer;
   background-color: rgba(245, 246, 252, 0.95);
-  
 }
 
 tr {
@@ -288,13 +297,14 @@ td {
   width: 15px;
 }
 
+
 /* GRID-GENERATOR  */
 
 .grid-generator {
   position: relative;
   padding: 10px;
   border: 1px solid #c6d3dd;
-  box-shadow: 1px 2px 2px 0px rgba(0,0,0,0.3);
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
   margin-bottom: 20px;
   background-color: rgba(245, 246, 252, 0.75);
@@ -324,19 +334,28 @@ input[type="number"] {
   display: inline-block;
   border-radius: 3px;
   border: 1px solid #c6d3dd;
-  box-shadow: 0px 0px 2px 2px rgba(46,61,73,0.15);
-  
+  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);
 }
 
 input[type="number"]:hover,
-input[type="number"]:focus  {
-  box-shadow: 5px 5px 6px 0px rgba(46, 61, 73, 0.3);
+input[type="number"]:focus {
+  box-shadow: 0px 0px 2px 2px rgba(46, 61, 73, 0.15);
   transition: 0.5s ease-in-out;
 }
 
-.grid-submit {
+#input_width {
+  margin-left: 5px;
+}
+
+#grid-submit {
   margin-top: 15px;
 }
+
+.grid-generator h3 {
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 24px;
+}
+
 
 /* TO-DO-LIST */
 
@@ -351,7 +370,7 @@ input[type="number"]:focus  {
 .to-do-item {
   border: 0.5px solid transparent;
   border-radius: 3px;
-  transition: 0.3s;   
+  transition: 0.3s;
 }
 
 .to-do-item:hover {
@@ -359,6 +378,7 @@ input[type="number"]:focus  {
   cursor: pointer;
   background-color: #f4f4ef;
 }
+
 .to-do-item p {
   padding: 0;
   margin: 5px;
@@ -380,11 +400,13 @@ input[type="number"]:focus  {
   background-image: url(http://freevector.co/wp-content/uploads/2014/07/74013-check-box-with-check-sign.png);
   background-repeat: no-repeat;
   background-size: contain;
-  opacity: 0.3;  
+  opacity: 0.3;
 }
+
 .success {
   order: 2;
 }
+
 .to-do-item.success p::after {
   opacity: 1;
   background-image: url(http://freevector.co/wp-content/uploads/2014/07/74013-check-box-with-check-sign.png);
@@ -396,8 +418,8 @@ input[type="number"]:focus  {
   position: relative;
   padding: 7px 60px;
   border: none;
-  box-shadow: 0px 0px 1px 0px rgba(46,61,73,0.3);
-  background-color: rgba(245, 246, 252, 0.85);  
+  box-shadow: 0px 0px 1px 0px rgba(46, 61, 73, 0.3);
+  background-color: rgba(245, 246, 252, 0.85);
 }
 
 .list-show-btn:hover::after {
@@ -423,17 +445,18 @@ input[type="number"]:focus  {
   border-bottom-color: rgba(0, 0, 0, 0.7);
 }
 
+
 /* FOOTER */
 
 .main-footer {
   height: 100px;
-  box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.12);
   padding: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: rgba(245, 246, 252, 0.85);
+  background-color: rgba(245, 246, 252, 0.7);
 }
 
 .project-link {
@@ -462,4 +485,3 @@ input[type="number"]:focus  {
   background-image: url(https://static1.squarespace.com/static/54a21086e4b097c5f1550ed8/557eee11e4b0c3993def002b/5702ac9ab6aa607cbb96e59e/1459793150043/udacity_logo_2.png);
   margin-right: 40px;
 }
-
