@@ -1,13 +1,4 @@
-const createBtn = $('#grid-submit');
-const listShow = $('.list-show-btn');
-const toDoList = $('.to-do-list');
-const toDoItem = $('.to-do-item');
-const hideBtn = $('.hide-btn');
-const warningText = $('.grid-generator p');
-const sizePicker = document.querySelector('#sizePicker');
-let color = $('.colorPicker').val();
 const colorArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
-
 
 // Random HEX color generator
 const rdmColor = () => {
@@ -18,17 +9,26 @@ const rdmColor = () => {
   return color;
 };
 
+const createBtn = $('#grid-submit');
+const listShow = $('.list-show-btn');
+const toDoList = $('.to-do-list');
+const toDoItem = $('.to-do-item');
+const hideBtn = $('.hide-btn');
+const warningText = $('.grid-generator p');
+const sizePicker = document.querySelector('#sizePicker');
+let color = rdmColor();
 
+$('.fill-btn').css('background-color', color);
 // Canvas grid generating function
 function makeGrid() {
   console.log('Making grid');
-  
+
   // getting sizes
   let width = $('#input_width').val();
   let height = $('#input_height').val();
   $('#pixel_canvas').remove();
   $('.control-panel').after('<table id="pixel_canvas"></table>');
-  
+
   // size validation
   if (width > 40) {
     width = 40;
@@ -38,7 +38,7 @@ function makeGrid() {
     height = 40;
     $(warningText).css('opacity', '1');
   }
-  
+
   // grid generator
   for (let row = 1; row <= height; row += 1) {
     $('#pixel_canvas').append(`<tr id='${row}'></tr>`);
@@ -46,8 +46,18 @@ function makeGrid() {
       $(`#${row}`).append('<td></td>');
     }
   }
-  $('#pixel_canvas').on('mousedown', 'td', evt => {
-    $(evt.target).css('background-color', color);
+
+  // painting function
+  $('#pixel_canvas').on('mousedown', 'td', (evt) => {
+    if (evt.which == 1) {
+      $(evt.target).css('background-color', color);
+    }
+    if (evt.which == 3) {
+      $('#pixel_canvas').bind('contextmenu', () => false);
+      $(evt.target).css('background-color', '#fff');
+      evt.preventDefault();
+      evt.stopPropagation();
+    }
   });
 }
 
@@ -64,7 +74,7 @@ $(listShow).on('click', () => {
 });
 
 // checking to-do items (done status switcher)
-$(toDoItem).on('click', evt => {
+$(toDoItem).on('click', (evt) => {
   $(evt.currentTarget).toggleClass('success');
 });
 
@@ -94,8 +104,8 @@ $('.clear-btn').on('click', () => {
     .css('background-color', 'white');
 });
 
-// painting function
-$('.palette').on('click', '.palette-btn', evt => {
+// paletter color picking function
+$('.palette').on('click', '.palette-btn', (evt) => {
   color = $(evt.target).css('background-color');
   $('.fill-btn').css('background-color', color);
 });

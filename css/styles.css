@@ -7,7 +7,9 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.3;
-  background-image: url(https://image.freepik.com/free-photo/blue-canvas-background_1253-61.jpg);
+  background-color : #f1f6f8
+;
+  /* background-image: url(https://image.freepik.com/free-photo/blue-canvas-background_1253-61.jpg); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -286,7 +288,7 @@ table {
   border-collapse: collapse;
   margin: 20px auto;
   cursor: pointer;
-  background-color: rgba(245, 246, 252, 0.95);
+  background-color: #FFF;
 }
 
 tr {
