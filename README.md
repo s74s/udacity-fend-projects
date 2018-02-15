@@ -1,16 +1,26 @@
-# Pixel Art Maker Project
+# Udacity Projects
 
-## Table of Contents
+## Animal Card
+
+[CodePen Link](https://codepen.io/KFBR392/pen/OORzrv)
+
+-----
+
+## Pixel Art Maker Project
+
+[CodePen Link](https://codepen.io/KFBR392/pen/yPzdNP)
+
+### Table of Contents
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
-## Instructions
+### Instructions
 
 To get started, open `designs.js` and start building out the app's functionality.
 
 For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
 
-## Contributing
+### Contributing
 
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
