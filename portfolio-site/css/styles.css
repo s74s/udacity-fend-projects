@@ -1,0 +1,254 @@
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+
+/* Container */
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Header */
+
+.main-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background-color:#575757;
+}
+
+.main-header::before,
+.main-header::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: #575757;
+  height: 100%;
+  width: 100%;
+}
+
+.main-header::before {
+  left: -100%;  
+}
+
+.main-header::after {
+  left: 100%;
+}
+
+.main-header__left {
+  display: flex;
+  align-items: center;
+}
+
+.main-header__right {
+  display: flex;
+  align-items: center;
+}
+
+.main-header__logo {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url(https://i.vimeocdn.com/portrait/11854029_300x300);
+}
+
+/* Navigation */
+
+.main-nav ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-nav__link {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  padding: 6px 14px;
+  margin-right: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.33;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.main-nav__link:hover,
+.main-nav__link.is-active {
+  color: #fff;
+}
+
+.main-nav__link:hover::before,
+.main-nav__link:hover::after,
+.main-nav__link.is-active::before,
+.main-nav__link.is-active::after {
+  transform: translate(0, 0);
+}
+
+.main-nav__link::before,
+.main-nav__link::after {
+  content: "";
+  width: 100%;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  background-color: #02b3e4;
+  transform: translate(-101%, 0);
+  transition: transform .2s linear;
+}
+
+.main-nav__link::before {
+  bottom: 0;
+  transform: translate(101%, 0);
+}
+
+.main-nav__link::after {
+  top: 0;
+  transform: translate(-101%, 0);
+}
+
+/* Main */
+
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main p {
+  text-align: center;
+}
+
+.main-title {
+  font-size: 55px;
+  text-align: center;
+  color: #02b3e4;
+  text-transform: uppercase;
+}
+
+/* Projects */
+
+.projects {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project__preview {
+  flex-grow: 1;
+  flex-basis: 30%;
+  background-color: #02b3e4;
+  height: 200px;
+  margin: 10px;
+  background-image: url(https://norbertbiedrzycki.pl/wp-content/uploads/2017/02/Norbert-Biedrzycki-computers-existence.jpg);
+  background-position: center;
+
+}
+
+.project__description {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.project__title {
+  margin: 8px;
+  margin-bottom: 3px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.project__category {
+  color: #a38383;
+}
+
+.category__tag {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+}
+
+/* Footer */
+
+.main-footer {
+  position: relative;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #575757;
+  color: #ffffff;
+}
+
+.main-footer::before,
+.main-footer::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: #575757;
+  height: 100%;
+  width: 100%;
+}
+
+.main-footer::before {
+  left: -100%;
+}
+
+.main-footer::after {
+  left: 100%;
+}
+
+.main-footer p {
+  text-align: center;
+}
+
+/* Media */
+
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 100%;
+  }
+
+  .project__preview {
+    flex-basis: 45%;
+  }
+
+  .main-header::before,
+  .main-header::after,
+  .main-footer::before,
+  .main-footer::after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  .main-header {
+    justify-content: space-around;
+  }
+
+  .main-nav__link {
+    padding: 2px;
+    margin: 0 10px;
+  }
+
+  .main-header__left .main-nav__link {
+    display: none;
+  }
+
+  .main-title {
+    font-size: 40px;
+  }
+
+  .project__preview {
+    flex-basis: 100%;
+  }
+}
