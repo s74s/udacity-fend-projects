@@ -7,7 +7,6 @@ body {
 /* Container */
 
 .container {
-  width: 80%;
   margin: 0 auto;
 }
 
@@ -15,27 +14,11 @@ body {
 
 .main-header {
   position: relative;
+  top: 0;
+  left: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color:#575757;
-}
-
-.main-header::before,
-.main-header::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background-color: #575757;
-  height: 100%;
-  width: 100%;
-}
-
-.main-header::before {
-  left: -100%;  
-}
-
-.main-header::after {
-  left: 100%;
 }
 
 .main-header__left {
@@ -118,7 +101,9 @@ body {
 
 main {
   min-height: 100vh;
+  margin: 0 auto;
   display: flex;
+  width: 80%;
   flex-direction: column;
 }
 
@@ -150,19 +135,25 @@ main p {
   margin: 10px;
   background-image: url(https://norbertbiedrzycki.pl/wp-content/uploads/2017/02/Norbert-Biedrzycki-computers-existence.jpg);
   background-position: center;
+  cursor: pointer;
+}
 
+.project__preview:hover .project__description {
+  opacity: 1;
 }
 
 .project__description {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0.5;
 }
 
 .project__title {
   margin: 8px;
   margin-bottom: 3px;
-  font-size: 20px;
+  font-size: 25px;
   color: #fff;
+  letter-spacing: 1px;
 }
 
 .project__category {
@@ -189,24 +180,6 @@ main p {
   color: #ffffff;
 }
 
-.main-footer::before,
-.main-footer::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background-color: #575757;
-  height: 100%;
-  width: 100%;
-}
-
-.main-footer::before {
-  left: -100%;
-}
-
-.main-footer::after {
-  left: 100%;
-}
-
 .main-footer p {
   text-align: center;
 }
@@ -214,12 +187,12 @@ main p {
 /* Media */
 
 @media screen and (max-width: 1024px) {
-  .container {
-    width: 100%;
-  }
-
   .project__preview {
     flex-basis: 45%;
+  }
+
+  .project__description {
+    opacity: 1;
   }
 
   .main-header::before,
@@ -231,9 +204,6 @@ main p {
 }
 
 @media screen and (max-width: 412px) {
-  .main-header {
-    justify-content: space-around;
-  }
 
   .main-nav__link {
     padding: 2px;
@@ -242,6 +212,10 @@ main p {
 
   .main-header__left .main-nav__link {
     display: none;
+  }
+
+  main {
+    width: 100%;
   }
 
   .main-title {
