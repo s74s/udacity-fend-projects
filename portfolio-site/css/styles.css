@@ -4,6 +4,11 @@ body {
   margin: 0;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 /* Container */
 
 .container {
@@ -100,6 +105,7 @@ body {
 /* Main */
 
 main {
+  position: relative;
   min-height: 100vh;
   margin: 0 auto;
   display: flex;
@@ -107,7 +113,9 @@ main {
   flex-direction: column;
 }
 
-main p {
+main .basic-text {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.35);
   text-align: center;
 }
 
@@ -118,6 +126,16 @@ main p {
   text-transform: uppercase;
 }
 
+.hero {
+  margin-bottom: 50px;
+}
+
+.hero img {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
 /* Projects */
 
 .projects {
@@ -125,47 +143,31 @@ main p {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: #fff;
 }
 
 .project__preview {
+  position: relative;
   flex-grow: 1;
   flex-basis: 30%;
-  background-color: #02b3e4;
-  height: 200px;
   margin: 10px;
-  background-image: url(https://norbertbiedrzycki.pl/wp-content/uploads/2017/02/Norbert-Biedrzycki-computers-existence.jpg);
-  background-position: center;
   cursor: pointer;
-}
-
-.project__preview:hover .project__description {
-  opacity: 1;
 }
 
 .project__description {
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.7);
-  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .project__title {
   margin: 8px;
   margin-bottom: 3px;
   font-size: 25px;
-  color: #fff;
-  letter-spacing: 1px;
+  color: #02b3e4;
 }
 
 .project__category {
   color: #a38383;
-}
-
-.category__tag {
-  display: inline-block;
-  padding: 5px;
-  margin: 5px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
 }
 
 /* Footer */
@@ -187,6 +189,14 @@ main p {
 /* Media */
 
 @media screen and (max-width: 1024px) {
+  .hero {
+    margin-bottom: 30px;
+  }
+
+  .basic-text {
+    font-size: 12px;
+  }
+
   .project__preview {
     flex-basis: 45%;
   }
@@ -204,7 +214,6 @@ main p {
 }
 
 @media screen and (max-width: 412px) {
-
   .main-nav__link {
     padding: 2px;
     margin: 0 10px;
@@ -218,8 +227,17 @@ main p {
     width: 100%;
   }
 
+  .hero {
+    margin-bottom: 0;
+  }
+
   .main-title {
     font-size: 40px;
+    margin-bottom: 0;
+  }
+
+  .basic-text {
+    font-size: 12px;
   }
 
   .project__preview {
