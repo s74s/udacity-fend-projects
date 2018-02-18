@@ -1,6 +1,6 @@
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: 0;
 }
 
@@ -23,7 +23,7 @@ img {
   left: 0;
   display: flex;
   justify-content: space-around;
-  background-color:#575757;
+  background: #575757;
 }
 
 .main-header__left {
@@ -41,10 +41,7 @@ img {
   width: 50px;
   height: 50px;
   margin: 10px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  background-image: url(https://i.vimeocdn.com/portrait/11854029_300x300);
+  background: url(https://i.vimeocdn.com/portrait/11854029_300x300) center / contain no-repeat;
 }
 
 /* Navigation */
@@ -61,8 +58,7 @@ img {
   padding: 6px 14px;
   margin-right: 10px;
   color: #fff;
-  font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font: 16px 'Open Sans', sans-serif;
   line-height: 1.33;
   text-decoration: none;
   text-transform: uppercase;
@@ -179,7 +175,7 @@ main .basic-text {
   justify-content: center;
   align-items: center;
   background-color: #575757;
-  color: #ffffff;
+  color: #fff;
 }
 
 .main-footer p {
@@ -216,11 +212,8 @@ main .basic-text {
 @media screen and (max-width: 412px) {
   .main-nav__link {
     padding: 2px;
-    margin: 0 10px;
-  }
-
-  .main-header__left .main-nav__link {
-    display: none;
+    margin: 0;
+    font-size: 14px;
   }
 
   main {
