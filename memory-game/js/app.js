@@ -1,7 +1,40 @@
-/*
- * Create a list that holds all of your cards
- */
+const deck = document.querySelector('.deck');
 
+// Create a list that holds all of your cards
+const cardTypes = ['paper-plane-o', 'diamond', 'anchor', 'bolt', 'cube', 'leaf', 'bicycle', 'bomb'];
+
+// Duplicate Array
+function duplicateArray(array, numberOfDuplicates = 2) {
+  const duplicates = [];
+  for (let i = 1; i <= numberOfDuplicates; i += 1) {
+    duplicates.push(...array);
+  }
+  return duplicates;
+}
+
+// Generating cards and append it to desk
+function generateDeck(cardTypes) {
+  const cardsToShuffle = duplicateArray(cardTypes);
+  const shuffledCards = shuffle(cardsToShuffle);
+  const fragment = document.createDocumentFragment();
+  const cards = shuffledCards.map((iconName, index) => createCard(iconName, index));
+  cards.forEach(card => fragment.appendChild(card));
+  deck.appendChild(fragment);
+}
+
+// Create Card
+function createCard(iconName, id) {
+  const card = document.createElement('li');
+  card.className = 'card show open';
+  const icon = document.createElement('i');
+  icon.className = `fa fa-${iconName}`;
+  card.appendChild(icon);
+  card.setAttribute('data-type', iconName);
+  return card;
+}
+
+
+generateDeck(cardTypes);
 
 /*
  * Display the cards on the page
