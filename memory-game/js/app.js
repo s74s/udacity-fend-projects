@@ -1,7 +1,9 @@
 const deck = document.querySelector('.deck');
-
-// Create a list that holds all of your cards
+const cardsToCompare = [];
+const matchedCards = [];
 const cardTypes = ['paper-plane-o', 'diamond', 'anchor', 'bolt', 'cube', 'leaf', 'bicycle', 'bomb'];
+
+// CREATE ITEMS
 
 // Duplicate Array
 function duplicateArray(array, numberOfDuplicates = 2) {
@@ -12,7 +14,7 @@ function duplicateArray(array, numberOfDuplicates = 2) {
   return duplicates;
 }
 
-// Generating cards and append it to desk
+// Generating cards and append it to deck
 function generateDeck(cardTypes) {
   const cardsToShuffle = duplicateArray(cardTypes);
   const shuffledCards = shuffle(cardsToShuffle);
@@ -25,14 +27,62 @@ function generateDeck(cardTypes) {
 // Create Card
 function createCard(iconName, id) {
   const card = document.createElement('li');
-  card.className = 'card show open';
+  card.className = 'card show';
   const icon = document.createElement('i');
   icon.className = `fa fa-${iconName}`;
+  card.id = id;
   card.appendChild(icon);
   card.setAttribute('data-type', iconName);
   return card;
 }
 
+// CARDS STATE
+
+// Flip card
+function filpCard(card) {
+  card.classList.toggle('show');
+  card.classList.toggle('open');  
+}
+
+// Get Card Type
+function getCardType(card) {
+  return card.dataset.type;
+}
+
+// Mark matching
+function markMatching(card) {
+  card.classList.remove('show', 'open');
+  card.classList.add('match');
+}
+
+// GLOBAL STATE
+// Compare Cards
+function compareCards() {
+  const [first, second] = cardsToCompare;
+  const isSimilar = getCardType(first) === getCardType(second);
+  
+  if (isSimilar) {
+    cardsToCompare.forEach(markMatching);
+    matchedCards.push(...cardsToCompare);
+    console.log(matchedCards);
+  }
+  else cardsToCompare.forEach(filpCard);
+  
+  cardsToCompare.length = 0;
+}
+
+// Handle card click
+function handleCardClick(event) {
+  const card = event.target;
+  if (card.nodeName === 'LI' && !card.classList.contains('match') && !cardsToCompare.includes(card)) {
+    cardsToCompare.push(card);
+    filpCard(card);
+  }
+  if (cardsToCompare.length === 2) compareCards();
+}
+
+// Cards click handler
+deck.addEventListener('click', handleCardClick);
 
 generateDeck(cardTypes);
 
