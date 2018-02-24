@@ -3,6 +3,12 @@ const cardsToCompare = [];
 const matchedCards = [];
 const cardTypes = ['paper-plane-o', 'diamond', 'anchor', 'bolt', 'cube', 'leaf', 'bicycle', 'bomb'];
 
+const stars = document.querySelectorAll('.fa-star');
+const movesIndicator = document.querySelector('.moves');
+let movesCounter = 3;
+const startBtn = document.querySelector('.start-btn');
+const newGameBtn = document.querySelector('.new-btn');
+
 // CREATE ITEMS
 
 // Duplicate Array
@@ -21,13 +27,14 @@ function generateDeck(cardTypes) {
   const fragment = document.createDocumentFragment();
   const cards = shuffledCards.map((iconName, index) => createCard(iconName, index));
   cards.forEach(card => fragment.appendChild(card));
+  movesIndicator.innerHTML = `${movesCounter} Moves`;
   deck.appendChild(fragment);
 }
 
 // Create Card
 function createCard(iconName, id) {
   const card = document.createElement('li');
-  card.className = 'card show';
+  card.className = 'card';
   const icon = document.createElement('i');
   icon.className = `fa fa-${iconName}`;
   card.id = id;
@@ -56,6 +63,25 @@ function markMatching(card) {
 }
 
 // GLOBAL STATE
+// Update Moves Indicator
+function updateMovesIndicator() {
+  if (movesCounter === 3) {
+    stars.forEach(star => {
+      if (!star.classList.contains('gold')) {
+        star.classList.add('gold');
+      }
+    })
+  }
+  else {
+    const star = stars[movesCounter];
+    star.classList.remove('gold');
+    const movesStatus = movesCounter === 1
+      ? '1 Move'
+      : `${movesCounter} Moves`;
+    movesIndicator.innerHTML = movesStatus;
+  }
+}
+
 // Compare Cards
 function compareCards() {
   const [first, second] = cardsToCompare;
@@ -64,25 +90,46 @@ function compareCards() {
   if (isSimilar) {
     cardsToCompare.forEach(markMatching);
     matchedCards.push(...cardsToCompare);
-    console.log(matchedCards);
+    cardsToCompare.length = 0;
   }
-  else cardsToCompare.forEach(filpCard);
-  
-  cardsToCompare.length = 0;
+  else {
+    movesCounter -= 1;    
+    updateMovesIndicator();
+    setTimeout(() => {
+      cardsToCompare.forEach(filpCard);
+      cardsToCompare.length = 0;
+    }, 1000);    
+  }
 }
 
-// Handle card click
+// Cards click handler
 function handleCardClick(event) {
   const card = event.target;
-  if (card.nodeName === 'LI' && !card.classList.contains('match') && !cardsToCompare.includes(card)) {
+  if (card.nodeName === 'LI' && !card.classList.contains('match') && !cardsToCompare.includes(card) && cardsToCompare.length < 2) {
     cardsToCompare.push(card);
     filpCard(card);
   }
   if (cardsToCompare.length === 2) compareCards();
 }
 
-// Cards click handler
+// Handle card click
 deck.addEventListener('click', handleCardClick);
+
+// Handle start btn click
+startBtn.addEventListener('click', () => {
+    deck.querySelectorAll('.card').forEach(filpCard);
+    setTimeout(() => deck.querySelectorAll('.card').forEach(filpCard), 3000);
+    startBtn.disabled = true;
+})
+
+// Handle new game btn click
+newGameBtn.addEventListener('click', () => {
+  deck.innerHTML = '';
+  movesCounter = 3;
+  updateMovesIndicator();
+  generateDeck(cardTypes);
+  startBtn.disabled = false;  
+});
 
 generateDeck(cardTypes);
 

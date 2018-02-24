@@ -107,3 +107,17 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+button {
+  text-transform: uppercase;
+  padding: 10px;
+  margin: 10px;
+}
+
+.fa-star {
+  font-size: 35px;
+}
+
+.gold {
+  color: gold;
+}
