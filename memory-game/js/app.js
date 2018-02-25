@@ -18,7 +18,6 @@ let movesCounter = 0;
 let time = 0;
 let timerInterval;
 
-// CREATE ITEMS
 // Duplicate Array
 function duplicateArray(array, numberOfDuplicates = 2) {
   const duplicates = [];
@@ -73,7 +72,7 @@ function shuffle(array) {
 // Flip card
 function filpCard(card) {
   card.classList.toggle('show');
-  card.classList.toggle('open');  
+  card.classList.toggle('open');
 }
 
 // Get Card Type
@@ -102,11 +101,11 @@ function tick() {
 
 //Update Rating
 function updateRatingIndicator() {
-  if (movesCounter > 18) {
+  if (movesCounter > 22) {
     stars[stars.length - 1].classList.remove('gold');
   }
-  if (movesCounter >= 25) {
-    stars[stars.length - 2].classList.remove('gold');    
+  if (movesCounter >= 30) {
+    stars[stars.length - 2].classList.remove('gold');
   }
   if (movesCounter === 0) {
     stars.forEach(star => {
@@ -120,7 +119,7 @@ function updateRatingIndicator() {
 function compareCards() {
   const [first, second] = cardsToCompare;
   const isSimilar = getCardType(first) === getCardType(second);
-  
+
   if (isSimilar) {
     cardsToCompare.forEach(markMatching);
     matchedCards.push(...cardsToCompare);
@@ -129,12 +128,11 @@ function compareCards() {
       clearInterval(timerInterval);
       showModal();
     }
-  }
-  else {
+  } else {
     setTimeout(() => {
       cardsToCompare.forEach(filpCard);
       cardsToCompare.length = 0;
-    }, 1000);    
+    }, 1000);
   }
 }
 
@@ -153,30 +151,37 @@ function handleCardClick(event) {
 // Handle card click
 deck.addEventListener('click', handleCardClick);
 
-// Handle start btn click
+// Start Game function
 function startGame(event) {
   deck.querySelectorAll('.card').forEach(filpCard);
   setTimeout(() => {
     deck.querySelectorAll('.card').forEach(filpCard);
     time = 0;
+    clearInterval(timerInterval);
     timerInterval = setInterval(tick, 1000);
   }, 3000);
   modal.classList.remove('show-modal');
-  startBtn.disabled = true;
 }
 
-startBtn.addEventListener('click', startGame);
+// Handle start btn click
+startBtn.addEventListener('click', () => {
+  deck.scrollIntoView();  
+  startGame();
+});
 
-// Handle new game btn click
+// Start New Game function
 function startNewGame(event) {
+  clearInterval(timerInterval);
   deck.innerHTML = '';
   movesCounter = 0;
   updateRatingIndicator();
   generateDeck(cardTypes);
-  startBtn.disabled = false;
-  clearInterval(timerInterval);
+  newGameBtn.disabled = true;
   startGame();
+  setTimeout(() => newGameBtn.disabled = false, 3000);
 }
+
+// Handle new game btn click
 newGameBtn.addEventListener('click', startNewGame);
 
 // Handle Game Finished
@@ -187,10 +192,13 @@ function gameFinished() {
 // Modals
 function showModal() {
   const modal = document.createElement('div');
+  const formattedTime = time >= 60
+    ? `${format(time)} ${time > 120 ? 'minutes' : 'minute'}`
+    : `${time} seconds`;
   modal.className = 'modal modal-results show-modal';
   modal.innerHTML = `<h2>Congratulations! You Win !</h2>
     <h3> You made ${movesCounter} moves</h3>
-    <h3>For ${format(time)} minutes</h3>
+    <h3>For ${formattedTime}</h3>
     <h3>Match rating</h3>
     <ul class="stars">
     </ul>`
@@ -198,19 +206,19 @@ function showModal() {
   const newGameBtn = document.createElement('button');
   newGameBtn.className = 'btn new-game-btn';
   newGameBtn.innerHTML = 'Next Game ?';
-  const closeModalBtn = document.createElement('button');  
-  closeModalBtn.className = 'close-modal';  
+  const closeModalBtn = document.createElement('button');
+  closeModalBtn.className = 'close-modal';
   newGameBtn.addEventListener('click', () => {
     modal.classList.remove('show-modal');
     startNewGame();
   });
   closeModalBtn.addEventListener('click', () => {
-    modal.classList.remove('show-modal');    
+    modal.classList.remove('show-modal');
   });
   modal.appendChild(ratingPanel);
   modal.appendChild(newGameBtn);
-  modal.appendChild(closeModalBtn);  
-  mainContainer.appendChild(modal);
+  modal.appendChild(closeModalBtn);
+  deck.appendChild(modal);
 }
 
 modalCloseBtn.addEventListener('click', () => {
