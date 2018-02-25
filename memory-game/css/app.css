@@ -17,20 +17,30 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
     font-family: 'Coda', cursive;
 }
 
-/* .container {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-} */
+}
 
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+}
+
+h3 {
+  margin: 0;
+}
+
+.btn {
+  /* height: 38px; */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*
@@ -86,19 +96,39 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-content: center;
 }
 
-.score-panel .stars {
+.stat-wrapper {
+  margin: 10px;
+  text-align: center;
+}
+
+.stat-wrapper .stats-string {
+  font-size: 30px;
+  display: inline-block;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.timer.stats-string,
+.moves.stats-string {
+  width: 90px;
+}
+
+.stars {
     margin: 0;
-    padding: 0;
+    padding: 5px 10px;
     display: inline-block;
     margin: 0 5px 0 0;
+    /* border: 1px solid gray; */
+    background-color: gray;
+    border-radius: 3px;
 }
 
-.score-panel .stars li {
+.stars li {
     list-style: none;
     display: inline-block;
 }
@@ -120,4 +150,53 @@ button {
 
 .gold {
   color: gold;
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  min-width: 450px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.show-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+button.close-modal {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  right: 0;
+  vertical-align: middle;
+}
+
+button.close-modal::after {
+  content: "X";
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  display: block;
+  position: absolute;
+  top: -3px; 
+  right: -3px;
+  width: 30px;
+  height: 32px;
+  border-radius: 2px;
+  background-color: gray;
+}
+
+.modal .stars {
+  background-color: transparent;
 }

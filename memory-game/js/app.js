@@ -1,16 +1,24 @@
+const mainContainer = document.querySelector('.container');
 const deck = document.querySelector('.deck');
 const cardsToCompare = [];
 const matchedCards = [];
 const cardTypes = ['paper-plane-o', 'diamond', 'anchor', 'bolt', 'cube', 'leaf', 'bicycle', 'bomb'];
 
+const modal = document.querySelector('.modal');
+const timer = document.querySelector('.timer');
 const stars = document.querySelectorAll('.fa-star');
 const movesIndicator = document.querySelector('.moves');
-let movesCounter = 3;
 const startBtn = document.querySelector('.start-btn');
 const newGameBtn = document.querySelector('.new-btn');
+const modalCloseBtn = document.querySelector('.close-modal');
+
+
+let numberOfCards = 0;
+let movesCounter = 0;
+let time = 0;
+let timerInterval;
 
 // CREATE ITEMS
-
 // Duplicate Array
 function duplicateArray(array, numberOfDuplicates = 2) {
   const duplicates = [];
@@ -26,8 +34,10 @@ function generateDeck(cardTypes) {
   const shuffledCards = shuffle(cardsToShuffle);
   const fragment = document.createDocumentFragment();
   const cards = shuffledCards.map((iconName, index) => createCard(iconName, index));
+  numberOfCards = cards.length;
   cards.forEach(card => fragment.appendChild(card));
-  movesIndicator.innerHTML = `${movesCounter} Moves`;
+  movesIndicator.innerHTML = movesCounter;
+  matchedCards.length = 0;
   deck.appendChild(fragment);
 }
 
@@ -44,6 +54,21 @@ function createCard(iconName, id) {
 }
 
 // CARDS STATE
+// Shuffle
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 // Flip card
 function filpCard(card) {
@@ -62,24 +87,33 @@ function markMatching(card) {
   card.classList.add('match');
 }
 
-// GLOBAL STATE
-// Update Moves Indicator
-function updateMovesIndicator() {
-  if (movesCounter === 3) {
+// Format time
+function format(sec) {
+  let minutes = Math.floor(sec / 60);
+  let seconds = sec % 60;
+  return `${minutes > 9 ? minutes : '0' + minutes}:${seconds > 9 ? seconds : '0' + seconds}`;
+}
+
+// Increment Time Counter
+function tick() {
+  time += 1;
+  timer.innerHTML = format(time);
+}
+
+//Update Rating
+function updateRatingIndicator() {
+  if (movesCounter > 18) {
+    stars[stars.length - 1].classList.remove('gold');
+  }
+  if (movesCounter >= 25) {
+    stars[stars.length - 2].classList.remove('gold');    
+  }
+  if (movesCounter === 0) {
     stars.forEach(star => {
-      if (!star.classList.contains('gold')) {
-        star.classList.add('gold');
-      }
+      if (!star.classList.contains('gold')) star.classList.add('gold')
     })
   }
-  else {
-    const star = stars[movesCounter];
-    star.classList.remove('gold');
-    const movesStatus = movesCounter === 1
-      ? '1 Move'
-      : `${movesCounter} Moves`;
-    movesIndicator.innerHTML = movesStatus;
-  }
+  movesIndicator.innerHTML = movesCounter;
 }
 
 // Compare Cards
@@ -91,10 +125,12 @@ function compareCards() {
     cardsToCompare.forEach(markMatching);
     matchedCards.push(...cardsToCompare);
     cardsToCompare.length = 0;
+    if (matchedCards.length === numberOfCards) {
+      clearInterval(timerInterval);
+      showModal();
+    }
   }
   else {
-    movesCounter -= 1;    
-    updateMovesIndicator();
     setTimeout(() => {
       cardsToCompare.forEach(filpCard);
       cardsToCompare.length = 0;
@@ -108,6 +144,8 @@ function handleCardClick(event) {
   if (card.nodeName === 'LI' && !card.classList.contains('match') && !cardsToCompare.includes(card) && cardsToCompare.length < 2) {
     cardsToCompare.push(card);
     filpCard(card);
+    movesCounter += 1;
+    updateRatingIndicator();
   }
   if (cardsToCompare.length === 2) compareCards();
 }
@@ -116,53 +154,69 @@ function handleCardClick(event) {
 deck.addEventListener('click', handleCardClick);
 
 // Handle start btn click
-startBtn.addEventListener('click', () => {
+function startGame(event) {
+  deck.querySelectorAll('.card').forEach(filpCard);
+  setTimeout(() => {
     deck.querySelectorAll('.card').forEach(filpCard);
-    setTimeout(() => deck.querySelectorAll('.card').forEach(filpCard), 3000);
-    startBtn.disabled = true;
-})
-
-// Handle new game btn click
-newGameBtn.addEventListener('click', () => {
-  deck.innerHTML = '';
-  movesCounter = 3;
-  updateMovesIndicator();
-  generateDeck(cardTypes);
-  startBtn.disabled = false;  
-});
-
-generateDeck(cardTypes);
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+    time = 0;
+    timerInterval = setInterval(tick, 1000);
+  }, 3000);
+  modal.classList.remove('show-modal');
+  startBtn.disabled = true;
 }
 
+startBtn.addEventListener('click', startGame);
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+// Handle new game btn click
+function startNewGame(event) {
+  deck.innerHTML = '';
+  movesCounter = 0;
+  updateRatingIndicator();
+  generateDeck(cardTypes);
+  startBtn.disabled = false;
+  clearInterval(timerInterval);
+  startGame();
+}
+newGameBtn.addEventListener('click', startNewGame);
+
+// Handle Game Finished
+function gameFinished() {
+  clearInterval(timerInterval);
+}
+
+// Modals
+function showModal() {
+  const modal = document.createElement('div');
+  modal.className = 'modal modal-results show-modal';
+  modal.innerHTML = `<h2>Congratulations! You Win !</h2>
+    <h3> You made ${movesCounter} moves</h3>
+    <h3>For ${format(time)} minutes</h3>
+    <h3>Match rating</h3>
+    <ul class="stars">
+    </ul>`
+  const ratingPanel = document.querySelector('.stars').cloneNode(true);
+  const newGameBtn = document.createElement('button');
+  newGameBtn.className = 'btn new-game-btn';
+  newGameBtn.innerHTML = 'Next Game ?';
+  const closeModalBtn = document.createElement('button');  
+  closeModalBtn.className = 'close-modal';  
+  newGameBtn.addEventListener('click', () => {
+    modal.classList.remove('show-modal');
+    startNewGame();
+  });
+  closeModalBtn.addEventListener('click', () => {
+    modal.classList.remove('show-modal');    
+  });
+  modal.appendChild(ratingPanel);
+  modal.appendChild(newGameBtn);
+  modal.appendChild(closeModalBtn);  
+  mainContainer.appendChild(modal);
+}
+
+modalCloseBtn.addEventListener('click', () => {
+  console.log('modal closed');
+  modal.classList.remove('show-modal');
+})
+
+// Initail deck generation
+generateDeck(cardTypes);
