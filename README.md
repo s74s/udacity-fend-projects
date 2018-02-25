@@ -17,3 +17,7 @@
 ## Portfolio Site Project
 
 [CodePen Link](https://codepen.io/KFBR392/pen/oEprEE)
+
+## Mathing Game Project
+
+[CodePen Link](https://codepen.io/KFBR392/pen/BYOXEP/)
