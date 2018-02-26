@@ -140,16 +140,13 @@ function compareCards() {
 function handleCardClick(event) {
   const card = event.target;
   if (card.nodeName === 'LI' && !card.classList.contains('match') && !cardsToCompare.includes(card) && cardsToCompare.length < 2) {
-    cardsToCompare.push(card);
     filpCard(card);
+    cardsToCompare.push(card);
     movesCounter += 1;
     updateRatingIndicator();
+    if (cardsToCompare.length === 2) compareCards();
   }
-  if (cardsToCompare.length === 2) compareCards();
 }
-
-// Handle card click
-deck.addEventListener('click', handleCardClick);
 
 // Start Game function
 function startGame(event) {
@@ -159,6 +156,9 @@ function startGame(event) {
     time = 0;
     clearInterval(timerInterval);
     timerInterval = setInterval(tick, 1000);
+
+    // Handle card click
+    deck.addEventListener('click', handleCardClick);
   }, 3000);
   modal.classList.remove('show-modal');
 }
