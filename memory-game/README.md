@@ -1,20 +1,21 @@
 # Memory Game Project
 
-## Table of Contents
+This is a card matching game.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## How to play
 
-## Instructions
+* All cards reveal at start for 3 seconds, you should try remember as much as you can.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+* Then player can flips pairs of cards over to reveal its underlying symbol, the goal is to find cards with same picures.
 
-To get started, open `js/app.js` and start building out the app's functionality
+* If the cards match, both cards stay flipped over and now marked as matched.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+* If the cards do not match, both cards flipping back face down.
 
-## Contributing
+* The game ends once all of cards have been correctly matched.
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+## How to Run
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+1. [Download](https://github.com/LWebGH/udacity-fend-projects/archive/master.zip) or [clone](https://github.com/LWebGH/udacity-fend-projects/archive/master.git) the repository. Go into **memory-game** folder and run **index.html** file in your browser.
+
+2. It also available on [CodePen](https://codepen.io/KFBR392/pen/BYOXEP)
