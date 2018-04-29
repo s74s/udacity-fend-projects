@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import './App.css'
 import * as BooksAPI from './BooksAPI'
@@ -7,6 +7,7 @@ import BookshelfsList from './components/BookshelfsList'
 import MainHeader from './components/MainHeader'
 import Searchbar from './components/Searchbar'
 import Bookshelf from './components/Bookshelf'
+import NavButton from './components/NavButton'
 
 const shelfs = [
   { name: 'wantToRead', title: 'Want To Read' },
@@ -23,11 +24,9 @@ export class App extends Component {
 
   componentWillMount = () => {
     BooksAPI.getAll()
-    .then(books => this.setState({ books }, () => {
-      console.log(books)
-    }))
+    .then(books => this.setState({ books }))
   }
-  
+
   searchBooks = (query) => {
     this.setState({ fetchingBooks: true })
     BooksAPI.search(query)
@@ -40,23 +39,39 @@ export class App extends Component {
       .then(() => this.props.history.push('/search'))
   }
 
+  handleShelfChange = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+      .then(() => BooksAPI.getAll())
+      .then((books) => {
+        this.setState({ books });
+      });
+  }
+
   render() {
     const { books, fetchingBooks } = this.state
 
     return (
         <div className="app">
           <MainHeader />
-          <Searchbar searchBooks={this.searchBooks} />
-          { fetchingBooks && <h2>Fetching Books</h2> }
+          <Searchbar
+            searchBooks={this.searchBooks}
+            isFetching={fetchingBooks}
+          />
+          <NavButton location={this.props.location} />
           <Switch>
             <Route exact path="/" render={() => 
-              <BookshelfsList books={books} shelfs={shelfs} />}
+              <BookshelfsList
+                books={books}
+                shelfs={shelfs}
+                changeBookShelf={this.handleShelfChange}
+              />}
             />
             <Route path="/search" render={() => (
               <Bookshelf
                 title="Search Results"
                 name="searchResults"
                 books={this.state.searchResults}
+                changeBookShelf={this.handleShelfChange}
               />)} 
             />
           </Switch>

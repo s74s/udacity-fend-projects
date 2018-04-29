@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { debounce } from 'lodash'
 
 export default class Searcbar extends Component {
   state = {
     value: '',
   }
 
+  startFetch = debounce((value) => {
+    this.props.searchBooks(value)
+  }, 700)
+
   handleChange = (event) => {
     const { value } = event.target
     this.setState({ value })
+    if (value) this.startFetch(value);
   }
 
   handleSubmit = (event) => {
@@ -18,6 +24,9 @@ export default class Searcbar extends Component {
   }
 
   render() {
+    const placeholder = this.props.isFetching
+      ? 'Fetching data...'
+      : 'Search by title or author'
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -32,9 +41,10 @@ export default class Searcbar extends Component {
           >
             <input
               type="text"
-              placeholder="Search by title or author"
+              placeholder={placeholder}
               onChange={this.handleChange}
               value={this.state.value}
+              required
             />
           </form>
         </div>

@@ -17,7 +17,7 @@ export default class BookshelfsList extends Component {
         {shelfs.map(({ name, title }) => (
           <li key={name}>
             <Bookshelf
-              name={name}
+              changeBookShelf={this.props.changeBookShelf}
               title={title}
               books={sortedBooks.get(name)}
             />
