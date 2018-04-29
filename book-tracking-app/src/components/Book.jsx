@@ -17,6 +17,7 @@ export default class Book extends Component {
   handleSelect = (event) => {
     const { value } = event.target
     const { book } = this.props
+    this.setState({ value })
     this.props.changeBookShelf(book, value)
   }
 
