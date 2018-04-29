@@ -12,7 +12,6 @@ export default class BookshelfsList extends Component {
   render() {
     const { books, shelfs } = this.props
     const sortedBooks = sortBooksByShelf(books)
-
     return (
       <ul>
         {shelfs.map(({ name, title }) => (
