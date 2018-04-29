@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class MainHeader extends Component {
-  render() {
-    return (
-      <div className="list-books-title">
-        <h1>My Reads</h1>
-      </div>
-    )
-  }
+export default function MainHeader(props) {
+  return (
+    <div className="list-books-title">
+      <h1>My Reads</h1>
+    </div>
+  )
 }

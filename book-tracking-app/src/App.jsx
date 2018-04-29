@@ -6,7 +6,6 @@ import * as BooksAPI from './BooksAPI'
 import BookshelfsList from './components/BookshelfsList'
 import MainHeader from './components/MainHeader'
 import SearchPage from './components/SearchPage'
-import Bookshelf from './components/Bookshelf'
 import NavButton from './components/NavButton'
 
 const shelfs = [
