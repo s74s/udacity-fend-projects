@@ -9,7 +9,7 @@ export default class Book extends Component {
 
   render() {
     const { title } = this.props.book
-    const { authors } = this.props.book || []
+    const { authors } = this.props.book
     const { thumbnail } = this.props.book.imageLinks || ''
 
     return (
@@ -27,7 +27,7 @@ export default class Book extends Component {
           </div>
         </div>
         <div className="book-title">{title}</div>
-        {authors.map(name => (
+        {authors && authors.map(name => (
           <div key={name} className="book-authors">
             {name}
           </div>

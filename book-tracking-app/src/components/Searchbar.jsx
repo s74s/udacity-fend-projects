@@ -32,7 +32,6 @@ export default class Searcbar extends Component {
         <div className="search-books-bar">
           <Link
             className="close-search"
-            onClick={this.handleBack}
             to="/"
           />
           <form
