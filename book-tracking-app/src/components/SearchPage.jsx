@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { debounce } from 'lodash'
 
-export default class Searcbar extends Component {
+import Bookshelf from './Bookshelf'
+
+export default class SearchPage extends Component {
   state = {
     value: '',
   }
@@ -47,6 +49,12 @@ export default class Searcbar extends Component {
             />
           </form>
         </div>
+        { this.state.value && <Bookshelf
+          title="Search Results"
+          name="searchResults"
+          books={this.props.searchResults}
+          changeBookShelf={this.props.handleShelfChange}
+        /> }
       </div>
     )
   }

@@ -5,7 +5,7 @@ import './App.css'
 import * as BooksAPI from './BooksAPI'
 import BookshelfsList from './components/BookshelfsList'
 import MainHeader from './components/MainHeader'
-import Searchbar from './components/Searchbar'
+import SearchPage from './components/SearchPage'
 import Bookshelf from './components/Bookshelf'
 import NavButton from './components/NavButton'
 
@@ -53,25 +53,21 @@ export class App extends Component {
     return (
         <div className="app">
           <MainHeader />
-          <Searchbar
-            searchBooks={this.searchBooks}
-            isFetching={fetchingBooks}
-          />
           <NavButton location={this.props.location} />
           <Switch>
             <Route exact path="/" render={() => 
               <BookshelfsList
-                books={books}
-                shelfs={shelfs}
-                changeBookShelf={this.handleShelfChange}
+              books={books}
+              shelfs={shelfs}
+              changeBookShelf={this.handleShelfChange}
               />}
             />
             <Route path="/search" render={() => (
-              <Bookshelf
-                title="Search Results"
-                name="searchResults"
-                books={this.state.searchResults}
-                changeBookShelf={this.handleShelfChange}
+              <SearchPage
+                searchBooks={this.searchBooks}
+                isFetching={fetchingBooks}
+                searchResults={this.state.searchResults}
+                handleShelfChange={this.handleShelfChange}
               />)} 
             />
           </Switch>
