@@ -84,10 +84,10 @@ class Player extends Entity {
         if (this.y > 0) this.y -= 80
         break
       case 'right':
-        if (this.x < 700) this.x += 100
+        if (this.x < 400) this.x += 100
         break
       case 'down':
-        if (this.y < 480) this.y += 80
+        if (this.y < 380) this.y += 80
         break
     }
   }
