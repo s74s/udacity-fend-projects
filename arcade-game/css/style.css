@@ -1,3 +1,11 @@
 body {
-    text-align: center;
+  text-align: center;
+}
+
+.win-counter {
+  margin-bottom: 0;
+}
+
+.lose-counter {
+  visibility: hidden;
 }
