@@ -73,10 +73,10 @@ $(function () {
     beforeAll((done) => {
       loadFeed(0, () => {
         initialEntries = document.querySelectorAll('.feed .entry')
-      })
-      loadFeed(1, () => {
-        anotherEntries = document.querySelectorAll('.feed .entry')
-        done()
+        loadFeed(1, () => {
+          anotherEntries = document.querySelectorAll('.feed .entry')
+          done()
+        })
       })
     })
 
