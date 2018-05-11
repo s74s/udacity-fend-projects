@@ -142,7 +142,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = `${restaurant.name} photo`;
+  image.alt = `${restaurant.name} restaurant photo`;
   li.append(image);
 
   const name = document.createElement('h1');
@@ -165,6 +165,18 @@ createRestaurantHTML = (restaurant) => {
   return li
 }
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('../sw.js').then((registration) => {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, (err) => {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
 /**
  * Add markers for current restaurants to the map.
  */
@@ -177,4 +189,15 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     });
     self.markers.push(marker);
   });
+}
+
+// SW registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('../sw.js')
+    .then((registration) => 
+      console.log('ServiceWorker registration successful', registration))
+    .catch((error) =>
+      console.error('SW registration failed: ', error))
+  })
 }
