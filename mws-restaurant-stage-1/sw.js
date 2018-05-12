@@ -1,17 +1,18 @@
 const staticCacheName = 'rest-app-v1'
 
 const urlsToCache = [
-  'index.html',
-  'restaurant.html',
-  'data/restaurants.json',
-  'js/dbhelper.js',
-  'js/main.js',
-  'js/restaurant_info.js',
-  'css/styles.css',
+  '/',
+  './index.html',
+  './restaurant.html',
+  './data/restaurants.json',
+  './js/dbhelper.js',
+  './js/main.js',
+  './js/restaurant_info.js',
+  './css/styles.css',
 ]
 
 for (let i = 1; i < 11; i += 1) {
-  urlsToCache.push(`img/${i}.jpg`)
+  urlsToCache.push(`./img/${i}.jpg`)
 }
 
 self.addEventListener('install', (event) => {
