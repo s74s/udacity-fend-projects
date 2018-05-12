@@ -18,7 +18,7 @@ CD to project folder install [http-server](https://www.npmjs.com/package/http-se
 
 ```shell
 npm install http-server -g
-http-server
+http-server -p 5500
 ```
 
-now you can visit http://localhost:8080(-p Port to use defaults to 8080) to view app
+now you can visit http://localhost:5500 to view app
