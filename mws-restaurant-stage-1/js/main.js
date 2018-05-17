@@ -145,7 +145,7 @@ createRestaurantHTML = (restaurant) => {
   image.alt = `${restaurant.name} restaurant photo`;
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.append(name);
 
@@ -182,10 +182,11 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 // SW registration
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('../sw.js')
-    .then((registration) => 
-      console.log('ServiceWorker registration successful', registration))
-    .catch((error) =>
-      console.error('SW registration failed: ', error))
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('SW registration successful: ', registration.scope)
+      }, (err) => {
+        console.error('SW registration failed: ', err)
+      })
   })
 }

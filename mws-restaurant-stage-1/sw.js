@@ -1,50 +1,40 @@
-const staticCacheName = 'rest-app-v1'
+const CACHE_NAME = 'restaurant-cache-v1'
 
 const urlsToCache = [
-  'index.html',
-  'restaurant.html',
-  'data/restaurants.json',
-  'js/dbhelper.js',
-  'js/main.js',
-  'js/restaurant_info.js',
-  'css/styles.css',
-]
+  '/',
+  './index.html',
+  './restaurant.html',
+  './css/styles.css',
+  './js/dbhelper.js',
+  './js/main.js',
+  './js/restaurant_info.js'
+];
 
 for (let i = 1; i < 11; i += 1) {
-  urlsToCache.push(`img/${i}.jpg`)
+  // push imgs urls to array
+  urlsToCache.push(`./img/${i}.jpg`)
 }
 
+// SW Install
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(staticCacheName)
+  event.waitUntil(
+    caches.open(CACHE_NAME)
     .then((cache) => {
-      console.log('Opened cache')
+      console.log('Opened new cache')
       return cache.addAll(urlsToCache)
-    }))
+    })
+  )
 })
 
-self.addEventListener('fetch', (event) => {
-  event.respondWith(caches.match(event.request)
-    .then((response) => {
-      if (response) return response
-
-      return fetch(event.request.clone()).then((response) => {
-        if (!response || response.status !== 200 || response.type !== 'basic')
-          return response
-
-        caches.open(staticCacheName)
-          .then((cache) => cache.put(event.request, response.clone()))
-        return response
-      })
-    }))
-})
-
+// SW Activate
 self.addEventListener('activate', (event) => {
-  const cacheWhitelist = ['rest-app-v1']
+  event.waitUntil(self.clients.claim())
+})
 
-  event.waitUntil(caches.keys().then(cacheNames =>
-    Promise.all(cacheNames.map((name) => {
-      if (cacheWhitelist.indexOf(name) === -1) {
-        return caches.delete(name);
-      }
-    }))))
+// Fetch Listener
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request, { ignoreSearch: true })
+    .then((response) =>  response || fetch(event.request))
+  )
 })
