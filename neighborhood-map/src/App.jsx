@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
+import { FS, FS_API_SEARCH_URL, mapCenter } from './data'
 
 class App extends Component {
+  componentDidMount = () => {
+    fetch(FS_API_SEARCH_URL)
+    .then(res => res.json())
+    .then(data => console.log(data.response.venues))
+  }
+  
   render() {
     return (
       <div className="App">
@@ -12,6 +19,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <section id="map" className="map" role="application">
+          <header>Here will be map</header>
+        </section>
       </div>
     )
   }
