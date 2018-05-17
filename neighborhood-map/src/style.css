@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+.map {
+  height: 100vh;
+}
+
 .App {
   text-align: center;
 }

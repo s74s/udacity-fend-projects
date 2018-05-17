@@ -3,6 +3,8 @@ export const mapCenter = {
   lng: 39.160884
 }
 
+export const MAP_API_KEY = 'AIzaSyAge91jiV8-YghZrpS9-uWHTdj3ePgXybg'
+
 export const FS = {
   API_URL_SEARCH: '//api.foursquare.com/v2/venues/search',
   LL: `${mapCenter.lat},${mapCenter.lng}`,
