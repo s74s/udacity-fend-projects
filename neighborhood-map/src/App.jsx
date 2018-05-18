@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import scriptLoader from 'react-async-script-loader'
 
+import PlacesList from './PlacesList'
 import logo from './logo.svg'
 import { FS, FS_API_SEARCH_URL, MAP_API_KEY, mapCenter } from './data'
 
@@ -12,13 +13,14 @@ class App extends Component {
 
   state = {
     isMapScriptLoaded: false,
+    places: [],
     map: null,
   }
 
   componentDidMount = () => {
     fetch(FS_API_SEARCH_URL)
     .then(res => res.json())
-    .then(data => console.log(data.response.venues))
+    .then(data => this.setState({ places: data.response.venues }))
   }
   
   static getDerivedStateFromProps({ isScriptLoadSucceed }, prevState) {
@@ -27,13 +29,13 @@ class App extends Component {
         zoom: 14,
         center: mapCenter,
       })
-      return { ...prevState, map, isMapScriptLoaded: isScriptLoadSucceed }
+      return { ...prevState, map, isMapScriptLoaded: true }
     }
     else return null
   }
 
   render() {
-    console.log(this.mapRef)
+    const { places } = this.state
     return (
       <div className="App">
         <header className="App-header">
@@ -46,6 +48,7 @@ class App extends Component {
         <section id="map" ref={this.mapRef} className="map" role="application">
           <header>Here will be map</header>
         </section>
+        <PlacesList places={places} />
       </div>
     )
   }
