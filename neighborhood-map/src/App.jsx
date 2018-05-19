@@ -12,7 +12,8 @@ class App extends Component {
   }
 
   state = {
-    isMapScriptLoaded: false,
+    isMapLoaded: false,
+    isPlacesLoaded: false,
     places: [],
     map: null,
   }
@@ -20,18 +21,39 @@ class App extends Component {
   componentDidMount = () => {
     fetch(FS_API_SEARCH_URL)
     .then(res => res.json())
-    .then(data => this.setState({ places: data.response.venues }))
+    .then(data => this.setState({ places: data.response.venues, isPlacesLoaded: true }))
   }
   
+  componentDidUpdate() {
+    const { map, isPlacesLoaded } = this.state
+    if (isPlacesLoaded && map) {
+      console.log('set markers')
+      this.setMapMarkers(map)
+    }
+  }
+
   static getDerivedStateFromProps({ isScriptLoadSucceed }, prevState) {
-    if (isScriptLoadSucceed) {
+    const { map, isPlacesLoaded } = prevState
+    if (isScriptLoadSucceed && !map) {
       const map = new window.google.maps.Map(document.getElementById('map'), {
-        zoom: 14,
+        zoom: 16,
         center: mapCenter,
       })
-      return { ...prevState, map, isMapScriptLoaded: true }
+      return { ...prevState, map, isMapLoaded: true }
     }
     else return null
+  }
+
+  setMapMarkers = () => {
+    const { places, map } = this.state
+    places.forEach(place => {
+      const marker = new window.google.maps.Marker({
+        map: map,
+        position: place.location,
+        animation: window.google.maps.Animation.DROP,
+        name: place.name
+      })
+    })
   }
 
   render() {

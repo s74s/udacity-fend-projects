@@ -27,7 +27,6 @@ export default class PlacesList extends Component {
 
   render() {
     const { filtredPlaces } = this.state
-    console.log(filtredPlaces)
     return (
       <section>
         <input
