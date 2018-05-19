@@ -23,14 +23,6 @@ class App extends Component {
     .then(res => res.json())
     .then(data => this.setState({ places: data.response.venues, isPlacesLoaded: true }))
   }
-  
-  componentDidUpdate() {
-    const { map, isPlacesLoaded } = this.state
-    if (isPlacesLoaded && map) {
-      console.log('set markers')
-      this.setMapMarkers(map)
-    }
-  }
 
   static getDerivedStateFromProps({ isScriptLoadSucceed }, prevState) {
     const { map, isPlacesLoaded } = prevState
@@ -44,33 +36,14 @@ class App extends Component {
     else return null
   }
 
-  setMapMarkers = () => {
-    const { places, map } = this.state
-    places.forEach(place => {
-      const marker = new window.google.maps.Marker({
-        map: map,
-        position: place.location,
-        animation: window.google.maps.Animation.DROP,
-        name: place.name
-      })
-    })
-  }
-
   render() {
-    const { places } = this.state
+    const { places, map } = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
         <section id="map" ref={this.mapRef} className="map" role="application">
           <header>Here will be map</header>
         </section>
-        <PlacesList places={places} />
+        <PlacesList places={places} map={map} />
       </div>
     )
   }
