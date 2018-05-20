@@ -98,6 +98,7 @@ export default class PlacesList extends Component {
         marker.addListener('click', () => {
           this.closeAllInfoWindows()
           infoWindow.open(map, marker)
+          map.setCenter(marker.getPosition())          
         })
 
         // Push marker and infowindow instances to array
@@ -115,13 +116,14 @@ export default class PlacesList extends Component {
     const marker = markers.find(marker => marker.name === name)
     const infoWindow = infoWindows.find(marker => marker.name === name)
     this.closeAllInfoWindows()
+    map.setCenter(marker.getPosition())
     infoWindow.open(map, marker)
   }
 
   render() {
     const { filtredPlaces } = this.state
     return (
-      <section>
+      <section className="places-form">
         <input
           role="search"
           aria-labelledby="filter"

@@ -10,35 +10,24 @@ body {
   float: right;
 }
 
-.App {
-  text-align: center;
+.places-form {
+  height: 100vh;
+  overflow: scroll;  
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.places-form input {
+  padding: 10px;
+  width: auto;
+  margin: 10px 0;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-ul {
+.places-form ul {
+  /* width: 20%; */
   margin: 0;
-  padding: 0;
+  padding: 5px;
 }
 
-ul li {
+.places-form ul li {
   list-style: none;
   margin: 5px;
   padding: 5px;
@@ -46,8 +35,54 @@ ul li {
   cursor: pointer;
 }
 
-ul li:hover {
+.places-form ul li:hover {
   background-color: #eee;
+}
+
+@media (max-width: 1240px) {
+  .map {
+    width: 70%;
+  }
+  .places-form {
+    width: 30%;
+    font-size: 14px;
+  }
+  .places-form input {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .map {
+    width: 100%;
+    margin-top: 250px;
+  }
+
+  .places-form {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .places-form input {
+    margin: 0;
+    padding: 5px 0;
+    width: 100%;
+  }
+
+  .places-form ul {
+    height: 200px;
+    overflow: scroll;
+    font-size: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .places-form ul li {
+    background-color: #fff;
+  }
 }
 
 @keyframes App-logo-spin {
