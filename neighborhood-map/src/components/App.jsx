@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react'
 import scriptLoader from 'react-async-script-loader'
 
 import PlacesList from './PlacesList'
-import logo from './logo.svg'
-import { FS, FS_API_SEARCH_URL, MAP_API_KEY, mapCenter } from './data'
+import { FS_API_SEARCH_URL, MAP_API_KEY, mapCenter } from '../helpers/data'
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class App extends Component {
 
   componentDidUpdate = () => {
     const { isPlacesLoaded, isMapLoaded, placesLoadingFailed } = this.state
-    console.log(this.state)
+    // Fetch data if map ready
     if (isMapLoaded && !isPlacesLoaded && !placesLoadingFailed) {
       this.fetchPlacesData()
     }
@@ -30,11 +29,12 @@ class App extends Component {
   
 
   static getDerivedStateFromProps({ isScriptLoadSucceed, isScriptLoaded }, prevState) {
-    const { map, isPlacesLoaded } = prevState
+    const { map } = prevState
+    // Error catching when map script loads
     if (!isScriptLoadSucceed && isScriptLoaded) {
       return { mapLoadingFailed: true }
     }
-
+    // Init map after map script loaded successfull
     if (isScriptLoadSucceed && !map) {
       const map = new window.google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -45,7 +45,8 @@ class App extends Component {
 
     else return null
   }
-
+  
+  // Fetch places from Foursquare API
   fetchPlacesData = () => {
     fetch(FS_API_SEARCH_URL)
       .then(res => res.json())
@@ -83,5 +84,4 @@ class App extends Component {
 }
 
 export default scriptLoader(
-  [`https://maps.googleapis.com/maps/api/js?key=${MAP_API_KEY}`])
-  (App)
+  [`https://maps.googleapis.com/maps/api/js?key=${MAP_API_KEY}`])(App)

@@ -20,26 +20,29 @@ body {
 
 .places-form {
   height: 100vh;
-  overflow: scroll;  
+  overflow: scroll;
 }
 
 .places-form input {
   padding: 10px;
-  width: auto;
+  width: 100%;
   margin: 10px 0;
 }
 
 .places-form ul {
-  /* width: 20%; */
   margin: 0;
   padding: 5px;
 }
 
 .places-form ul li {
   list-style: none;
+  font-size: 14px;
+  text-align: center;
   margin: 5px;
-  padding: 5px;
+  padding: 10px;
+  padding-left: 20px;
   border: 1px solid #ddd;
+  background-color: #fff;
   cursor: pointer;
 }
 
@@ -48,13 +51,15 @@ body {
 }
 
 @media (max-width: 1240px) {
+  
   .map {
     width: 70%;
   }
+
   .places-form {
     width: 30%;
-    font-size: 14px;
   }
+
   .places-form input {
     margin: 0;
     width: 100%;
@@ -62,6 +67,7 @@ body {
 }
 
 @media (max-width: 768px) {
+
   .map {
     width: 100%;
     margin-top: 250px;
@@ -73,30 +79,28 @@ body {
     left: 0;
     width: 100%;
     overflow: hidden;
+    height: 250px;
   }
 
   .places-form input {
     margin: 0;
-    padding: 5px 0;
+    padding: 10px;
     width: 100%;
   }
 
   .places-form ul {
     height: 200px;
     overflow: scroll;
-    font-size: 10px;
     background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .places-form ul li {
-    background-color: #fff;
   }
 }
 
 @keyframes App-logo-spin {
+
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

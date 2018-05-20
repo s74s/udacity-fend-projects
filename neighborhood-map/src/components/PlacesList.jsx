@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { setInfoWindowContent } from './helpers'
+import { setInfoWindowContent } from '../helpers/helpers'
 
 export default class PlacesList extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ export default class PlacesList extends Component {
   // Filter Markers and Places list on inupt value change
   handleFilterChange = () => {
     const { value } = this.filterInput.current
-    const { filtredPlaces, places } = this.state
+    const { places } = this.state
     this.filterMarkers(value)
     if (value) {
       const filtred = places.filter(item =>
