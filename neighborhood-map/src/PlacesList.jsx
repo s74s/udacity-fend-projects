@@ -20,7 +20,6 @@ export default class PlacesList extends Component {
     const { map } = this.props
     const { places, isMarkersSet } = this.state
     if (map && places.length && !isMarkersSet) {
-      console.log('set markers')
       this.setMapMarkersAndInfowindows()
       this.setState({ isMarkersSet: true })
     }
@@ -48,7 +47,6 @@ export default class PlacesList extends Component {
   filterMarkers = (value) => {
     const { markers } = this.state
     const { map } = this.props
-    console.log(value)
     markers.forEach((marker, i) => {
       const isVisible = marker.name.toLowerCase().includes(value.toLowerCase())
       marker.setMap(isVisible ? map : null)
@@ -120,8 +118,8 @@ export default class PlacesList extends Component {
     infoWindow.open(map, marker)
   }
 
-  render() {
-    const { filtredPlaces } = this.state
+  renderList = () => {
+    const { filtredPlaces } = this.state    
     return (
       <section className="places-form" role="complementary">
         <input
@@ -135,7 +133,7 @@ export default class PlacesList extends Component {
         <ul>
           {filtredPlaces.map(place => {
             return (
-              <li 
+              <li
                 onClick={this.handleListItemClick(place.name)}
                 key={place.id}
                 role="button"
@@ -146,6 +144,15 @@ export default class PlacesList extends Component {
           })}
         </ul>
       </section>
+    )
+  }
+
+  render() {
+    const { fetchFailed } = this.props
+    return (
+      fetchFailed
+      ? <div role="alert"><h2>Foursquare data load failed</h2></div>
+      : this.renderList()
     )
   }
 }

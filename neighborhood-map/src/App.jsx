@@ -13,16 +13,17 @@ class App extends Component {
 
   state = {
     isMapLoaded: false,
-    isPlacesLoaded: false,
     mapLoadingFailed: false,
+    isPlacesLoaded: false,
+    placesLoadingFailed: false,
     places: [],
     map: null,
   }
 
   componentDidUpdate = () => {
-    const { isPlacesLoaded, isMapLoaded } = this.state
+    const { isPlacesLoaded, isMapLoaded, placesLoadingFailed } = this.state
     console.log(this.state)
-    if (isMapLoaded && !isPlacesLoaded) {
+    if (isMapLoaded && !isPlacesLoaded && !placesLoadingFailed) {
       this.fetchPlacesData()
     }
   }
@@ -48,12 +49,18 @@ class App extends Component {
   fetchPlacesData = () => {
     fetch(FS_API_SEARCH_URL)
       .then(res => res.json())
-      .then(data => this.setState({ places: data.response.venues, isPlacesLoaded: true }))
-      .catch(error => console.error(error))
+      .then(data => {
+        data.response.venues
+        ? this.setState({ places: data.response.venues, isPlacesLoaded: true })
+        : this.setState({ placesLoadingFailed: true })
+      })
+      .catch(error => {
+        console.info(error)
+      })
   }
 
   render() {
-    const { places, map, mapLoadingFailed } = this.state
+    const { places, map, mapLoadingFailed, placesLoadingFailed } = this.state
     return (
       <Fragment>
         { mapLoadingFailed
@@ -63,7 +70,11 @@ class App extends Component {
           : <div className="App" role="main">
               <section id="map" ref={this.mapRef} className="map" role="application">
               </section>
-              <PlacesList places={places} map={map} />
+            <PlacesList
+              places={places}
+              map={map}
+              fetchFailed={placesLoadingFailed}
+            />
             </div>
         }
       </Fragment>
@@ -72,5 +83,5 @@ class App extends Component {
 }
 
 export default scriptLoader(
-  [`https://maps.googleapis.com/aps/api/js?key=${MAP_API_KEY}`])
+  [`https://maps.googleapis.com/maps/api/js?key=${MAP_API_KEY}`])
   (App)
