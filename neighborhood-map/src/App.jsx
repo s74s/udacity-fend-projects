@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import scriptLoader from 'react-async-script-loader'
 
 import PlacesList from './PlacesList'
@@ -14,18 +14,26 @@ class App extends Component {
   state = {
     isMapLoaded: false,
     isPlacesLoaded: false,
+    mapLoadingFailed: false,
     places: [],
     map: null,
   }
 
-  componentDidMount = () => {
-    fetch(FS_API_SEARCH_URL)
-    .then(res => res.json())
-    .then(data => this.setState({ places: data.response.venues, isPlacesLoaded: true }))
+  componentDidUpdate = () => {
+    const { isPlacesLoaded, isMapLoaded } = this.state
+    console.log(this.state)
+    if (isMapLoaded && !isPlacesLoaded) {
+      this.fetchPlacesData()
+    }
   }
+  
 
-  static getDerivedStateFromProps({ isScriptLoadSucceed }, prevState) {
+  static getDerivedStateFromProps({ isScriptLoadSucceed, isScriptLoaded }, prevState) {
     const { map, isPlacesLoaded } = prevState
+    if (!isScriptLoadSucceed && isScriptLoaded) {
+      return { mapLoadingFailed: true }
+    }
+
     if (isScriptLoadSucceed && !map) {
       const map = new window.google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -33,21 +41,36 @@ class App extends Component {
       })
       return { ...prevState, map, isMapLoaded: true }
     }
+
     else return null
   }
 
+  fetchPlacesData = () => {
+    fetch(FS_API_SEARCH_URL)
+      .then(res => res.json())
+      .then(data => this.setState({ places: data.response.venues, isPlacesLoaded: true }))
+      .catch(error => console.error(error))
+  }
+
   render() {
-    const { places, map } = this.state
+    const { places, map, mapLoadingFailed } = this.state
     return (
-      <div className="App" role="main">
-        <section id="map" ref={this.mapRef} className="map" role="application">
-        </section>
-        <PlacesList places={places} map={map} />
-      </div>
+      <Fragment>
+        { mapLoadingFailed
+          ? <div role="alert">
+              <h2 className="warning">Map Loading Failed</h2>
+            </div>
+          : <div className="App" role="main">
+              <section id="map" ref={this.mapRef} className="map" role="application">
+              </section>
+              <PlacesList places={places} map={map} />
+            </div>
+        }
+      </Fragment>
     )
   }
 }
 
 export default scriptLoader(
-  [`https://maps.googleapis.com/maps/api/js?key=${MAP_API_KEY}`])
+  [`https://maps.googleapis.com/aps/api/js?key=${MAP_API_KEY}`])
   (App)
