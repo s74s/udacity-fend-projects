@@ -55,6 +55,11 @@ export default class PlacesList extends Component {
     })
   }
 
+  // Close all opened infowindows
+  closeAllInfoWindows = () => {
+    this.state.infoWindows.forEach(infoWindow => infoWindow.close())
+  }
+
   // Set map markers on map and add infowindows for every marker instance
   setMapMarkersAndInfowindows = () => {
     const { places } = this.state
@@ -85,14 +90,13 @@ export default class PlacesList extends Component {
             marker.setAnimation(null)
           } else {
             marker.setAnimation(window.google.maps.Animation.BOUNCE)
-            setTimeout(() => marker.setAnimation(null), 2000)
+            setTimeout(() => marker.setAnimation(null), 500)
           }
         })
         
         // Open marker infowindow, only one open at time
         marker.addListener('click', () => {
-          // Close all opened infowindows
-          this.state.infoWindows.forEach(infoWindow => infoWindow.close())
+          this.closeAllInfoWindows()
           infoWindow.open(map, marker)
         })
 
@@ -105,9 +109,13 @@ export default class PlacesList extends Component {
     this.setState({ markers, infoWindows })
   }
 
-  setInfoWindows = () => {
-    const { places } = this.state
+  handleListItemClick = (name) => (e) => {
+    const { markers, infoWindows } = this.state
     const { map } = this.props
+    const marker = markers.find(marker => marker.name === name)
+    const infoWindow = infoWindows.find(marker => marker.name === name)
+    this.closeAllInfoWindows()
+    infoWindow.open(map, marker)
   }
 
   render() {
@@ -125,7 +133,12 @@ export default class PlacesList extends Component {
         <ul>
           {filtredPlaces.map(place => {
             return (
-              <li key={place.id}>{place.name}</li>
+              <li 
+                onClick={this.handleListItemClick(place.name)}
+                key={place.id}
+              >
+                {place.name}
+              </li>
             )
           })}
         </ul>

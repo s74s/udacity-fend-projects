@@ -33,6 +33,22 @@ body {
 .App-intro {
   font-size: large;
 }
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+ul li:hover {
+  background-color: #eee;
+}
 
 @keyframes App-logo-spin {
   from {
