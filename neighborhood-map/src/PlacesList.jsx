@@ -123,7 +123,7 @@ export default class PlacesList extends Component {
   render() {
     const { filtredPlaces } = this.state
     return (
-      <section className="places-form">
+      <section className="places-form" role="complementary">
         <input
           role="search"
           aria-labelledby="filter"
@@ -138,6 +138,7 @@ export default class PlacesList extends Component {
               <li 
                 onClick={this.handleListItemClick(place.name)}
                 key={place.id}
+                role="button"
               >
                 {place.name}
               </li>

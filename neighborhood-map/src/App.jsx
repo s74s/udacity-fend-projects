@@ -39,9 +39,8 @@ class App extends Component {
   render() {
     const { places, map } = this.state
     return (
-      <div className="App">
+      <div className="App" role="main">
         <section id="map" ref={this.mapRef} className="map" role="application">
-          <header>Here will be map</header>
         </section>
         <PlacesList places={places} map={map} />
       </div>
