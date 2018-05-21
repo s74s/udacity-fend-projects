@@ -127,13 +127,12 @@ export default class PlacesList extends Component {
         role="complementary"
       >
         <label>
-          Search:
+          Filter:
         <input
             role="search"
             aria-labelledby="filter"
             type="text"
             ref={this.filterInput}
-            placeholder="Filter..."
             onChange={this.handleFilterChange}
           />
         </label>
