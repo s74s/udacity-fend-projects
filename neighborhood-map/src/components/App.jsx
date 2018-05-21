@@ -7,6 +7,7 @@ import { FS_API_SEARCH_URL, MAP_API_KEY, mapCenter } from '../helpers/data'
 class App extends Component {
   constructor(props) {
     super(props)
+    this.mapRef = React.createRef()
   }
 
   state = {
@@ -19,6 +20,7 @@ class App extends Component {
   }
 
   componentDidUpdate = () => {
+    console.log(this.state)
     const { isPlacesLoaded, isMapLoaded, placesLoadingFailed } = this.state
     // Fetch data if map ready
     if (isMapLoaded && !isPlacesLoaded && !placesLoadingFailed) {
@@ -27,8 +29,10 @@ class App extends Component {
   }
 
 
-  static getDerivedStateFromProps({ isScriptLoadSucceed, isScriptLoaded }, prevState) {
+  static getDerivedStateFromProps(prevProps, prevState) {
     const { map } = prevState
+    const { isScriptLoadSucceed, isScriptLoaded } = prevProps
+
     // Error catching when map script loads
     if (!isScriptLoadSucceed && isScriptLoaded) {
       return { mapLoadingFailed: true }
@@ -68,6 +72,7 @@ class App extends Component {
         <div className="App" role="main">
           <section
             id="map"
+            ref={this.mapRef}
             className="map"
             role="application"
           >
