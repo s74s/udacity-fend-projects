@@ -73,7 +73,7 @@ export default class PlacesList extends Component {
           animation: window.google.maps.Animation.DROP,
           name: place.name
         })
-        
+
         // Create infowindow instance
         const content = setInfoWindowContent(place)
         const infoWindow = new window.google.maps.InfoWindow({
@@ -92,12 +92,12 @@ export default class PlacesList extends Component {
             setTimeout(() => marker.setAnimation(null), 500)
           }
         })
-        
+
         // Open marker infowindow, only one open at time
         marker.addListener('click', () => {
           this.closeAllInfoWindows()
           infoWindow.open(map, marker)
-          map.setCenter(marker.getPosition())          
+          map.setCenter(marker.getPosition())
         })
 
         // Push marker and infowindow instances to array
@@ -120,23 +120,31 @@ export default class PlacesList extends Component {
   }
 
   renderList = () => {
-    const { filtredPlaces } = this.state    
+    const { filtredPlaces } = this.state
     return (
-      <section className="places-form" role="complementary">
+      <section
+        className="places-form"
+        role="complementary"
+      >
+        <label>
+          Search:
         <input
-          role="search"
-          aria-labelledby="filter"
-          type="text"
-          ref={this.filterInput}
-          placeholder="Filter..."
-          onChange={this.handleFilterChange}
-        />
+            role="search"
+            aria-labelledby="filter"
+            type="text"
+            ref={this.filterInput}
+            placeholder="Filter..."
+            onChange={this.handleFilterChange}
+          />
+        </label>
         <ul>
           {filtredPlaces.map(place => {
             return (
               <li
-                onClick={this.handleListItemClick(place.name)}
                 key={place.id}
+                onClick={this.handleListItemClick(place.name)}
+                onKeyPress={this.handleListItemClick(place.name)}
+                tabIndex="0"
                 role="button"
               >
                 {place.name}
@@ -152,8 +160,8 @@ export default class PlacesList extends Component {
     const { fetchFailed } = this.props
     return (
       fetchFailed
-      ? <div role="alert"><h2>Foursquare data load failed</h2></div>
-      : this.renderList()
+        ? <div role="alert"><h2>Foursquare data load failed</h2></div>
+        : this.renderList()
     )
   }
 }

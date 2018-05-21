@@ -19,6 +19,7 @@ body {
 }
 
 .places-form {
+  text-align: center;  
   height: 100vh;
   overflow: scroll;
 }
