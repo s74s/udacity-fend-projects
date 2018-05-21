@@ -5,7 +5,6 @@ export const setInfoWindowContent = (place) => {
   const URLname = name.split(' ').join('-').toLowerCase()
   const foursquareURL = `https://foursquare.com/v/${URLname}/${id}`
 
-  console.log(place)
   return (
     `<div>
       <h2>${name}</h2>

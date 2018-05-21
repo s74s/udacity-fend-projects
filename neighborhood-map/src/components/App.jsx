@@ -7,7 +7,6 @@ import { FS_API_SEARCH_URL, MAP_API_KEY, mapCenter } from '../helpers/data'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.mapRef = React.createRef()
   }
 
   state = {
@@ -26,7 +25,7 @@ class App extends Component {
       this.fetchPlacesData()
     }
   }
-  
+
 
   static getDerivedStateFromProps({ isScriptLoadSucceed, isScriptLoaded }, prevState) {
     const { map } = prevState
@@ -45,15 +44,15 @@ class App extends Component {
 
     else return null
   }
-  
+
   // Fetch places from Foursquare API
   fetchPlacesData = () => {
     fetch(FS_API_SEARCH_URL)
       .then(res => res.json())
       .then(data => {
         data.response.venues
-        ? this.setState({ places: data.response.venues, isPlacesLoaded: true })
-        : this.setState({ placesLoadingFailed: true })
+          ? this.setState({ places: data.response.venues, isPlacesLoaded: true })
+          : this.setState({ placesLoadingFailed: true })
       })
       .catch(error => {
         console.info(error)
@@ -62,23 +61,28 @@ class App extends Component {
   }
 
   render() {
-    const { places, map, mapLoadingFailed, placesLoadingFailed } = this.state
+    const { places, map, isMapLoaded, mapLoadingFailed, placesLoadingFailed } = this.state
+    const isMapExist = isMapLoaded || !mapLoadingFailed
     return (
       <Fragment>
-        { mapLoadingFailed
-          ? <div role="alert">
-              <h2 className="warning">Map Loading Failed</h2>
-            </div>
-          : <div className="App" role="main">
-              <section id="map" ref={this.mapRef} className="map" role="application">
-              </section>
+        <div className="App" role="main">
+          <section
+            id="map"
+            className="map"
+            role="application"
+          >
+            {!isMapExist &&
+              <div role="alert">
+                <h2 className="warning">Map Loading Failed</h2>
+              </div>}
+          </section>
+          {isMapExist &&
             <PlacesList
               places={places}
               map={map}
               fetchFailed={placesLoadingFailed}
-            />
-            </div>
-        }
+            />}
+        </div>
       </Fragment>
     )
   }
