@@ -78,7 +78,8 @@ export default class PlacesList extends Component {
         const content = setInfoWindowContent(place)
         const infoWindow = new window.google.maps.InfoWindow({
           content,
-          name: place.name
+          name: place.name,
+          maxWidth: 300,
         })
 
         // Set marker animation

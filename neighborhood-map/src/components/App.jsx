@@ -57,6 +57,7 @@ class App extends Component {
       })
       .catch(error => {
         console.info(error)
+        this.setState({ placesLoadingFailed: true })
       })
   }
 
