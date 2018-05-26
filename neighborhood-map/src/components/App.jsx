@@ -20,33 +20,25 @@ class App extends Component {
   }
 
   componentDidUpdate = () => {
-    console.log(this.state)
-    const { isPlacesLoaded, isMapLoaded, placesLoadingFailed } = this.state
+    const { isPlacesLoaded, isMapLoaded, placesLoadingFailed, mapLoadingFailed } = this.state
+    const { isScriptLoadSucceed, isScriptLoaded } = this.props
+    const { map } = this.state
+    // Error catching when map script loads
+    if (!isScriptLoadSucceed && isScriptLoaded && !mapLoadingFailed) {
+      this.setState({ mapLoadingFailed: true })
+    }
+    // Init map after map script loaded successfull
+    if (isScriptLoadSucceed && !map) {
+      const map = new window.google.maps.Map(this.mapRef.current, {
+        zoom: 16,
+        center: mapCenter,
+      })
+      this.setState({ map, isMapLoaded: true })
+    }
     // Fetch data if map ready
     if (isMapLoaded && !isPlacesLoaded && !placesLoadingFailed) {
       this.fetchPlacesData()
     }
-  }
-
-
-  static getDerivedStateFromProps(prevProps, prevState) {
-    const { map } = prevState
-    const { isScriptLoadSucceed, isScriptLoaded } = prevProps
-
-    // Error catching when map script loads
-    if (!isScriptLoadSucceed && isScriptLoaded) {
-      return { mapLoadingFailed: true }
-    }
-    // Init map after map script loaded successfull
-    if (isScriptLoadSucceed && !map) {
-      const map = new window.google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: mapCenter,
-      })
-      return { ...prevState, map, isMapLoaded: true }
-    }
-
-    else return null
   }
 
   // Fetch places from Foursquare API
